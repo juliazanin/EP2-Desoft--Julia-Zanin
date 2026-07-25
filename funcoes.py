@@ -58,3 +58,10 @@ def valida_questoes (lista):
         saida= valida_questao(questao)
         final.append(saida)
     return final
+
+#exercicio 4
+import random 
+def sorteia_questao (questoes,nivel):
+    opcoes= questoes[nivel] #lista de questoes(representadas por dicionarios) daquele nivel
+    indice_sorteada= random.randint(0, len(opcoes) - 1)
+    return opcoes[indice_sorteada]
