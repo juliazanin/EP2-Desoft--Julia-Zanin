@@ -65,3 +65,12 @@ def sorteia_questao (questoes,nivel):
     opcoes= questoes[nivel] #lista de questoes(representadas por dicionarios) daquele nivel
     indice_sorteada= random.randint(0, len(opcoes) - 1)
     return opcoes[indice_sorteada]
+
+#exercicio 5
+def sorteia_questao_inedita (questoes,nivel,sorteadas):
+    questao_sorteada= sorteia_questao(questoes,nivel)
+    while questao_sorteada in sorteadas:
+        questao_sorteada= sorteia_questao(questoes,nivel)
+
+    sorteadas.append(questao_sorteada)
+    return questao_sorteada
