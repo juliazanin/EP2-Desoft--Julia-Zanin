@@ -74,3 +74,14 @@ def sorteia_questao_inedita (questoes,nivel,sorteadas):
 
     sorteadas.append(questao_sorteada)
     return questao_sorteada
+
+#exercicio 6
+def questao_para_texto (questao, id):
+    pergunta= questao["titulo"]
+    opcaoA= questao["opcoes"]["A"]
+    opcaoB= questao["opcoes"]["B"]
+    opcaoC= questao["opcoes"]["C"]
+    opcaoD= questao["opcoes"]["D"]
+
+    string= f"----------------------------------------\nQUESTAO {id}\n\n{pergunta}\n\nRESPOSTAS:\nA: {opcaoA}\nB: {opcaoB}\nC: {opcaoC}\nD: {opcaoD}"
+    return string
