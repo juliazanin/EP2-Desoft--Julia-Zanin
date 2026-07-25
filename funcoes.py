@@ -85,3 +85,36 @@ def questao_para_texto (questao, id):
 
     string= f"----------------------------------------\nQUESTAO {id}\n\n{pergunta}\n\nRESPOSTAS:\nA: {opcaoA}\nB: {opcaoB}\nC: {opcaoC}\nD: {opcaoD}"
     return string
+
+#exercicio 7
+import random 
+def gera_ajuda(questao):
+    correta= questao["correta"]
+    incorretas=[]
+    for opcao in questao["opcoes"]:
+        if opcao!=correta:
+            incorretas.append(opcao)
+    
+    dicas= random.randint(1,2)
+    if dicas==1:
+        dica= random.randint(0,len(incorretas)-1)
+        dica=incorretas[dica]
+        dica=questao["opcoes"][dica]
+        final= f"DICA:\nOpções certamente erradas: {dica}"
+
+    elif dicas==2:
+        dica1=random.randint(0,len(incorretas)-1)
+        dica1=incorretas[dica1]
+        incorretas=[]
+        for opcao in questao["opcoes"]:
+            if opcao!=correta and opcao!=dica1:
+                incorretas.append(opcao)
+
+        dica1=questao["opcoes"][dica1]
+        
+        dica2=random.randint(0,len(incorretas)-1)
+        dica2=incorretas[dica2]
+        dica2=questao["opcoes"][dica2]
+        final= f"DICA:\nOpções certamente erradas: {dica1} | {dica2}"
+
+    return final
