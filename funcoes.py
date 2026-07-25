@@ -49,4 +49,12 @@ def valida_questao(questao):
             saida["correta"]="valor_errado"
     
     return saida
-        
+
+
+#exercicio 3
+def valida_questoes (lista):
+    final= []
+    for questao in lista:
+        saida= valida_questao(questao)
+        final.append(saida)
+    return final
