@@ -25,7 +25,7 @@ def exibe_manual(pulos_iniciais, ajudas_iniciais,nome):
     print("Responda às perguntas corretamente e leve para casa R$ 1.000.000!")
     print("A cada pergunta, escolha uma das opções: A, B, C ou D.")
     print(f"Você também pode digitar {NEGRITO}PULA{RESET} para trocar de pergunta")
-    print(f"(você tem {pulos_iniciais}) pulos ou {NEGRITO}AJUDA{RESET} para eliminar")
+    print(f"(você tem {pulos_iniciais} pulos) ou {NEGRITO}AJUDA{RESET} para eliminar")
     print(f"respostas erradas (você tem {ajudas_iniciais} ajudas no total do jogo).")
     print(f"Se errar uma pergunta, você perde tudo! Boa sorte {nome}!\n")
 
