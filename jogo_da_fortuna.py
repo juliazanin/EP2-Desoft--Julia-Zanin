@@ -105,3 +105,37 @@ def joga_uma_partida(base_por_nivel, nome_jogador):
         indice_pergunta += 1
  
     return premio_atual
+
+
+#jogo completo
+def principal():
+    lista_questoes = perguntas
+ 
+    if not valida_base(lista_questoes):
+        print(f"{VERMELHO}A base de perguntas está inconsistente. "
+              f"Corrija o arquivo antes de jogar.{RESET}")
+        return
+ 
+    base_por_nivel = transforma_base(lista_questoes)
+ 
+    for nivel in ("facil", "medio", "dificil"):
+        if nivel not in base_por_nivel or len(base_por_nivel[nivel]) < 3: #confere se a lista de perguntas de cada cada nivel tem no mínimo três perguntas 
+            print(f"{VERMELHO}É preciso ter pelo menos 3 perguntas de nível "
+                  f"'{nivel}' na base.{RESET}")
+            return
+ 
+    print(f"{MAGENTA}{NEGRITO}Bem-vindo(a) ao Fortuna DesSoft!{RESET}")
+    nome_jogador = pede_nome()
+    exibe_manual(PULOS_INICIAIS, AJUDAS_INICIAIS, nome_jogador)
+
+    jogar_de_novo=True
+    while jogar_de_novo==True:
+        premio_final = joga_uma_partida(base_por_nivel, nome_jogador)
+        print(f"\n{NEGRITO}Fim de jogo! Prêmio final de {nome_jogador}: R$ {premio_final}{RESET}")
+        jogar_de_novo = pergunta_sim_ou_nao("Quer jogar novamente?")
+ 
+    print(f"\n{CIANO}Obrigado por jogar, {nome_jogador}!{RESET}")
+ 
+ 
+
+principal()
