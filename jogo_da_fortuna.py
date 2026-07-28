@@ -46,6 +46,62 @@ def valida_base(lista_questoes):
         return False
     else:
         return True
-    
+
+
+#partida completa
+def joga_uma_partida(base_por_nivel, nome_jogador):
+    premio_atual = 0
+    pulos_restantes = PULOS_INICIAIS
+    ajudas_restantes = AJUDAS_INICIAIS
+    sorteadas = []
+    indice_pergunta = 0
  
+    for nivel in NIVEL_PERGUNTA:
+        premio_da_pergunta = PREMIOS[indice_pergunta]
+        cor = cor_do_premio(premio_da_pergunta)
  
+        print(f"\n{cor}{NEGRITO}Prêmio atual: R$ {premio_atual}{RESET}")
+        print(f"{cor}Pergunta de R$ {premio_da_pergunta} (nível {nivel}){RESET}")
+ 
+        questao = sorteia_questao_inedita(base_por_nivel, nivel, sorteadas)
+        ajuda_usada_na_pergunta = False
+        opcao = None
+        resposta_definida = False
+ 
+        while not resposta_definida:  # repete enquanto o jogador pular ou pedir ajuda
+            print(questao_para_texto(questao, indice_pergunta + 1))
+ 
+            opcao = pede_opcao(pulos_restantes, ajudas_restantes, ajuda_usada_na_pergunta)
+ 
+            if opcao == "PULA":
+                pulos_restantes -= 1
+                questao = sorteia_questao_inedita(base_por_nivel, nivel, sorteadas)
+                ajuda_usada_na_pergunta = False
+            elif opcao == "AJUDA":
+                ajuda= gera_ajuda(questao)
+                print(f"{AMARELO}{ajuda}{RESET}")
+                ajudas_restantes -= 1
+                ajuda_usada_na_pergunta = True
+            else:  # opcao é A, B, C ou D
+                resposta_definida = True  
+ 
+        if opcao == questao["correta"]:
+            premio_atual = premio_da_pergunta
+            print(f"{VERDE}{NEGRITO}Resposta correta! Prêmio: R$ {premio_atual}{RESET}")
+ 
+            if premio_atual == PREMIOS[-1]:
+                print(f"\n{VERDE}{NEGRITO}PARABÉNS, {nome_jogador}! "
+                      f"Você ganhou o prêmio máximo de R$ {premio_atual}!{RESET}")
+                return premio_atual
+ 
+            if not pergunta_sim_ou_nao("Deseja continuar jogando?"):
+                print(f"\n{CIANO}Você decidiu parar. Saiu com R$ {premio_atual}!{RESET}")
+                return premio_atual
+        else:
+            print(f"{VERMELHO}{NEGRITO}Resposta errada! A correta era {questao['correta']}.{RESET}")
+            print(f"{VERMELHO}Você saiu sem nenhum prêmio, {nome_jogador}!{RESET}")
+            return 0
+ 
+        indice_pergunta += 1
+ 
+    return premio_atual
